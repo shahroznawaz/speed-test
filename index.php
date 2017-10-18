@@ -1,36 +1,42 @@
 <?php
 
 include 'ApiHit.php';
-$url = "https://www.wpblog.com/";
+$url = "https://www.google.com.sg/";
 $result = new ApiHit();
+$replywebpagetest = $result->webpagetest($url);
 $replydesktop = $result->testpage($url);
 $replymobile = $result->testpagemobile($url);
-$replywebpagetest = $result->webpagetest($url);
+
+echo "<h1>.::. Website URL: https://www.google.com.sg/ .::.</h1>";
+
+echo "<h3>Desktop Score: ".$replydesktop->ruleGroups->SPEED->score."</h3>";
+echo "<h3>Mobile Score: ".$replymobile->ruleGroups->SPEED->score."</h3>";
+
+echo "<h2>.::. WebPageTest.ORG Data .::.</h2>";
 
 echo "<pre>";
 print_r($replywebpagetest);
 echo "</pre>";
 
-print_r($replywebpagetest->data->summaryCSV);
-
 $str = $replywebpagetest->data->summaryCSV;
 
-sleep(30);
+sleep(35);
 
 $csv = array_map('str_getcsv', file($str));
+
+echo "<h2>.::. WebPageTest.ORG CSV Data .::.</h2>";
 
 echo "<pre>";
 print_r($csv);
 echo "</pre>";
 
-echo "<h3>Desktop: ".$replydesktop->ruleGroups->SPEED->score."</h3>";
-echo "<h3>Mobile: ".$replymobile->ruleGroups->SPEED->score."</h3>";
+echo "<h2>.::. Google PageSpeedTest Desktop Data .::.</h2>";
 
 echo "<pre>";
 print_r($replydesktop);
 echo "</pre>";
 
-echo "<h1>.::.Mobile Data.::.</h1>";
+echo "<h2>.::. Google PageSpeedTest Mobile Data .::.</h2>";
 
 echo "<pre>";
 print_r($replymobile);
