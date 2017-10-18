@@ -39,5 +39,17 @@ Class ApiHit
 		return $result;
 	}
 
+	public function webpagetest($url)
+	{
+		$call = "http://www.webpagetest.org/runtest.php";
+		$auth_key = "A.193c0cf2fd250424e593430ea84b3125";
+		$format = "json";
+		$option = array('exceptions' => false);
+		$data = array('url' => $url, 'k' => $auth_key, 'f' => $format);
+		$response = $this->client->get($call, array('query' => $data));
+		$result = json_decode($response->getBody()->getContents());
+		return $result;
+	}
+
 }
 ?>
